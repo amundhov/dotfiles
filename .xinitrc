@@ -1,4 +1,6 @@
 cd
 export LC_ALL="nb_NO.UTF-8"
 xlock &
+urxvtd -q -f
+setxkbmap no
 awesome
