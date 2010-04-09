@@ -1,7 +1,24 @@
-# Check for an interactive session
-[ -z "$PS1" ] && return
-PS1='[\u@\h \W]\$ '
+export LC_ALL="nb_NO.UTF-8"
 
+# Ikke fortsett hvis vi ikke kjører interaktiv
+[ -z "$PS1" ] && return
+
+alias samfundet='ssh login.samfundet.no'
+alias ntnu='ssh login.stud.ntnu.no'
+alias admin='ssh root@einhov.dyndns.org'
+alias vi='vim'
+alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
+alias mplaylist='mplayer -playlist'
+
+export PATH=${PATH}:/usr/local/bin:/usr/local/sbin:/usr/local/games
+
+set -o vi
+
+# Givf PATH med $HOME/bin
+[ -d $HOME/bin ] && PATH="$HOME/bin:${PATH};/usr/local/bin"
+
+
+# Ingen duplikate linjer i historien, behold historie lenge.
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=9999
 export HISTIGNORE="ls:l:cd:logout:exit:echo:"
@@ -12,6 +29,13 @@ shopt -s checkwinsize
 # Bedre håndtering av ikke-tekst i less
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
+# sett navn på choot, hvis chroot.
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+# Givf colorzing at Prompt!
+PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[00m\]@\[\033[33m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
 # sett tittel til user@host:dir - nå også inni screen!
 case "$TERM" in
 screen*)
@@ -21,7 +45,7 @@ screen*)
     # på å putte denne i .screenrc: shelltitle '$ |'
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007\033k\033\\"'
     eval "`dircolors -b`"
-    #alias ls='ls --color=auto -F'
+    alias ls='ls --color=auto -F'
     ;;
 xterm*|rxvt*)
     #Setter tittel i xterm/kompatible
@@ -51,9 +75,7 @@ alias :q='exit'
 xset b off 2>/dev/null
 setterm -blength 0
 
-alias ls='ls --color=auto'
 export EDITOR=vim
 
-export LC_ALL="nb_NO.UTF-8"
 
 eval `keychain --eval --nogui -Q -q id_rsa`
