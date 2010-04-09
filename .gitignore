@@ -1,0 +1,15 @@
+/*
+!.*
+
+.Xauthority
+.bash_history
+.cache/
+.config/
+.dbus/
+.fontconfig/
+.htoprc
+.lesshst
+.links/
+.local/
+.ssh/
+.viminfo
