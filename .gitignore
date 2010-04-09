@@ -13,3 +13,7 @@
 .local/
 .ssh/
 .viminfo
+.keychain/
+.ssh/
+.esd_auth
+.mozilla/
