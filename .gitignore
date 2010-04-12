@@ -18,3 +18,12 @@
 .esd_auth
 .mozilla/
 .macromedia/
+.adobe/
+.apvlvinfo
+.fehbg
+.fehrc
+.gconfd/
+.gstreamer-0.10/
+.mplayer/
+.recently-used.xbel
+.thumbnails/
