@@ -4,4 +4,6 @@ xlock &
 urxvtd -q -f
 setxkbmap no
 nitrogen --restore
+conky -d
+cairo-compmgr &
 awesome
