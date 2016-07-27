@@ -1,0 +1,10 @@
+$if Bash
+    Space: magic-space
+$endif
+
+set completion-ignore-case on
+set visible-stats on
+
+set editing-mode vi
+set keymap vi
+set convert-meta on
