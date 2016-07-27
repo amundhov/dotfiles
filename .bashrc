@@ -9,14 +9,18 @@ else
     IS_MAC=false
 fi
 
+export EDITOR=vim
+
 alias samfundet='ssh amundhov@login.samfundet.no'
 alias ntnu='ssh login.stud.ntnu.no'
 alias admin='ssh root@einhov.dyndns.org'
 alias vi='vim'
+alias g='git'
 alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
 alias mplaylist='mplayer -playlist'
+alias conflicts="git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs -o $EDITOR && git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs git add"
 
-export PATH=${PATH}:/usr/local/bin:/usr/local/sbin:/usr/local/games
+export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games
 
 if $IS_MAC; then
     # MAC quirks
@@ -26,8 +30,6 @@ fi
 
 set -o vi
 
-# Givf PATH med $HOME/bin
-[ -d $HOME/bin ] && PATH="$HOME/bin:${PATH};/usr/local/bin"
 
 
 unset HISTFILESIZE
@@ -102,7 +104,6 @@ $IS_MAC || setterm -blength 0
 XML_CATALOG_FILES=~/.vim/dtd1.2/catalog-dita.xml
 export XML_CATALOG_FILES
 
-export EDITOR=vim
 
 # Don't exit straight away ^D
 export IGNOREEOF=1

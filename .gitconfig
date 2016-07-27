@@ -1,3 +1,17 @@
 [user]
 	name = Amund Hov
 	email = amundhov@samfundet.no
+
+[rerere]
+   enabled = true
+   autoupdate = true
+
+[alias]
+    s = status -s
+    b = branch -av
+    ca = commit --amend 
+    co = checkout
+    lc = log ORIG_HEAD.. --stat --no-merges
+    l = log -p
+    changes = diff --name-status -r
+    deleted = ls-files -d
