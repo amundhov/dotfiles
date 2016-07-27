@@ -1,16 +1,35 @@
-color ron
 
-" If KDE, set a readable font
-if has("gui_kde")
-   set guifont=Courier\ 10\ Pitch/10/-1/5/50/0/0/0/1/0
-endif
+let $PYTHONPATH='.'
 
 " Clear any existing autocommands..
 autocmd!
+autocmd FileType help wincmd L
 
 if has('syntax') && (&t_Co > 2)
   syntax on
 endif
+
+
+set number
+set cursorline
+
+execute pathogen#infect()
+
+" Generate helptags for all plugins if not present
+execute pathogen#helptags()
+
+"let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_signs=1
+let g:syntastic_python_python_exec='python3'
+"let g:syntastic_python_checkers=['pyflakes', 'flake8']
+let g:syntastic_python_checkers=['pylint', 'flake8', 'pyflakes']
+let g:syntastic_check_on_open=1
+"let g:syntastic_auto_jump = 1
+autocmd BufRead * SyntasticCheck
+
+" CtrlP fuzzy file search
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 
 set history=50
 " remember all of these between sessions, but only 10 search terms; also
@@ -105,8 +124,7 @@ autocmd FileType make set noexpandtab shiftwidth=8
 autocmd FileType mail set com=s1:/*,mb:*,ex:*/,n:>,b:#,b:%,b:=,b:-,b:+,b:o fo=tqlnor
 
 " Python
-autocmd FileType py set expandtab tabstop=4 shiftwidth=4
-
+autocmd FileType py set expandtab tabstop=4 shiftwidth=4 smartindent python_highlight_all=1
 
 " * Search & Replace
 
@@ -176,8 +194,12 @@ set backspace=eol,start,indent
 "inoremap <S-Tab> <C-D>
 " [<Ctrl>+V <Tab> still inserts an actual tab character.]
 
-set backupdir=~/.backup
-set dir=~/.backup
+set backupdir=~/.vim/backup
+set dir=~/.vim/backup
+let myvar = strftime("%y%m%d_%Hh%M")
+let myvar = "set backupext=_". myvar
+execute myvar
+set backup
 
 " We play utf-8
 set fileencoding=utf-8
@@ -196,3 +218,6 @@ set termencoding=utf-8
 
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
+
+set laststatus=2
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
