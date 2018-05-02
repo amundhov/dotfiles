@@ -1,4 +1,5 @@
-export LC_ALL="en_DK.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 
 # Ikke fortsett hvis vi ikke kjører interaktiv
 [ -z "$PS1" ] && return
@@ -16,6 +17,8 @@ alias ntnu='ssh login.stud.ntnu.no'
 alias admin='ssh root@einhov.dyndns.org'
 alias vi='vim'
 alias g='git'
+alias cv='git cv'
+alias sc='/Applications/Commander.app/Contents/MacOS/commander'
 alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
 alias mplaylist='mplayer -playlist'
 alias conflicts="git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs -o $EDITOR && git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs git add"
@@ -24,12 +27,11 @@ export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games
 
 if $IS_MAC; then
     # MAC quirks
-    export HOMEBREW_GITHUB_API_TOKEN='e18d78cd807dbae5b9e5020fb90b0e7ea415042d'
+    export HOMEBREW_GITHUB_API_TOKEN='1e38364e537a4e25514ad2fc3b5717c0fe9c49e9'
     if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 fi
 
 set -o vi
-
 
 
 unset HISTFILESIZE
@@ -98,7 +100,7 @@ alias :q='exit'
 [ -f $brew_prefix/share/bash-completion/ ] && . $brew_prefix/share/bash-completion/bash_completion
 
 # Ingen bell
-xset b off 2>/dev/null
+$IS_MAC || xset b off 2>/dev/null
 $IS_MAC || setterm -blength 0
 
 XML_CATALOG_FILES=~/.vim/dtd1.2/catalog-dita.xml

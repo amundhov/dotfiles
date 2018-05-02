@@ -10,7 +10,7 @@ if has('syntax') && (&t_Co > 2)
 endif
 
 
-set number
+set relativenumber
 set cursorline
 
 execute pathogen#infect()
@@ -22,13 +22,17 @@ execute pathogen#helptags()
 let g:syntastic_enable_signs=1
 let g:syntastic_python_python_exec='python3'
 "let g:syntastic_python_checkers=['pyflakes', 'flake8']
-let g:syntastic_python_checkers=['pylint', 'flake8', 'pyflakes']
-let g:syntastic_check_on_open=1
+let g:syntastic_python_checkers=['pylint', 'pyflakes']
+"let g:syntastic_check_on_open=0
 "let g:syntastic_auto_jump = 1
 autocmd BufRead * SyntasticCheck
 
 " CtrlP fuzzy file search
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+" Sane Ignore For ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|output\|test_logs\|test_releases\|test_logs_split$',
+  \ }
 
 
 set history=50
@@ -124,7 +128,7 @@ autocmd FileType make set noexpandtab shiftwidth=8
 autocmd FileType mail set com=s1:/*,mb:*,ex:*/,n:>,b:#,b:%,b:=,b:-,b:+,b:o fo=tqlnor
 
 " Python
-autocmd FileType py set expandtab tabstop=4 shiftwidth=4 smartindent python_highlight_all=1
+autocmd FileType python set expandtab tabstop=4 shiftwidth=4 smartindent "python_highlight_all=1
 
 " * Search & Replace
 
