@@ -1,0 +1,12 @@
+[submodule ".vim/bundle/vim-pathogen.git"]
+	path = .vim/bundle/vim-pathogen.git
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule ".vim/bundle/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim
+[submodule ".vim/bundle/syntastic.vim"]
+	path = .vim/bundle/syntastic.vim
+	url = https://github.com/vim-syntastic/syntastic.git
+[submodule ".vim/bundle/neomake"]
+	path = .vim/bundle/neomake
+	url = https://github.com/neomake/neomake.git

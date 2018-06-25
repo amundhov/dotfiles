@@ -19,13 +19,16 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 "let g:syntastic_auto_loc_list=1
-let g:syntastic_enable_signs=1
-let g:syntastic_python_python_exec='python3'
+"let g:syntastic_enable_signs=1
+"let g:syntastic_python_python_exec='python3'
 "let g:syntastic_python_checkers=['pyflakes', 'flake8']
-let g:syntastic_python_checkers=['pylint', 'pyflakes']
+"let g:syntastic_python_checkers=['pylint', 'pyflakes']
 "let g:syntastic_check_on_open=0
 "let g:syntastic_auto_jump = 1
-autocmd BufRead * SyntasticCheck
+call neomake#configure#automake('nw', 750)
+
+
+inoremap jk <esc>
 
 " CtrlP fuzzy file search
 set runtimepath^=~/.vim/bundle/ctrlp.vim

@@ -27,7 +27,7 @@ export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games
 
 if $IS_MAC; then
     # MAC quirks
-    export HOMEBREW_GITHUB_API_TOKEN='1e38364e537a4e25514ad2fc3b5717c0fe9c49e9'
+    export HOMEBREW_GITHUB_API_TOKEN='97a41f87fd1953cd6b634fb83f9bf4cff5c6fc05'
     if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 fi
 
@@ -55,6 +55,9 @@ fi
 
 if $IS_MAC; then
     brew_prefix=$(brew --prefix)
+    alias vim='nvim'
+    alias fixInkscape='wmctrl -r Inkscape -e 0,4000,2560,2880,1800'
+    alias fixInkscapeExt='wmctrl -r Inkscape -e 0,0,0,2560,1300'
 else
     brew_prefix=''
 fi
@@ -111,7 +114,7 @@ export XML_CATALOG_FILES
 export IGNOREEOF=1
 
 #[ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
-$(command -v __git_ps1>/dev/null) && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+$(command -v __git_ps1>/dev/null) && PS1='\[\033[00m\]\W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
 
 $IS_MAC || eval `keychain --eval --nogui -Q -q id_rsa`
 
