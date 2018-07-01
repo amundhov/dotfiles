@@ -2,10 +2,19 @@ URxvt.saveLines:32767
 URxvt.scrollBar: false
 
 URxvt*depth: 32
-URxvt*foreground:green
+URxvt*foreground:white
 URxvt*background:rgba:0000/0000/0000/0000
 
 URxvt.perl-ext: default, matcher
 URxvt.urlLauncher: /usr/bin/firefox
 URxvt.matcher.button: 2
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-] 
+
+URxvt.perl-ext-common:  default, resize-font
+
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+

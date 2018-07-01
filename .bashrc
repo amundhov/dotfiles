@@ -1,4 +1,5 @@
-export LC_ALL="en_DK.UTF-8"
+export LC_ALL="nb_NO.UTF-8"
+export LANGUAGE='en'
 
 # Ikke fortsett hvis vi ikke kjører interaktiv
 [ -z "$PS1" ] && return
@@ -19,8 +20,9 @@ alias g='git'
 alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
 alias mplaylist='mplayer -playlist'
 alias conflicts="git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs -o $EDITOR && git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs git add"
+alias makeaur='makepkg -sri'
 
-export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games
+export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games:~/.local/bin
 
 if $IS_MAC; then
     # MAC quirks
@@ -99,7 +101,6 @@ alias :q='exit'
 
 # Ingen bell
 xset b off 2>/dev/null
-$IS_MAC || setterm -blength 0
 
 XML_CATALOG_FILES=~/.vim/dtd1.2/catalog-dita.xml
 export XML_CATALOG_FILES
@@ -109,9 +110,17 @@ export XML_CATALOG_FILES
 export IGNOREEOF=1
 
 #[ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
-$(command -v __git_ps1>/dev/null) && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+PS1='\[\033[0;32m\]\u\[\033[00m\] \W \$ '
+if $IS_MAC; then
+	(command -v __git_ps1>/dev/null) && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+#else
+#	source /usr/share/git/completion/git-completion.bash
+#	PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+fi
 
 $IS_MAC || eval `keychain --eval --nogui -Q -q id_rsa`
 
-PERL_MB_OPT="--install_base \"/Users/amhov/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/amhov/perl5"; export PERL_MM_OPT;
+PERL_MB_OPT="--install_base \"${HOME}/perl5\"";
+PERL_MM_OPT="INSTALL_BASE=/${HOME}/perl5"
+export PERL_MB_OPT
+export PERL_MM_OPT
