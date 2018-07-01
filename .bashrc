@@ -17,6 +17,8 @@ alias ntnu='ssh login.stud.ntnu.no'
 alias admin='ssh root@einhov.dyndns.org'
 alias vi='vim'
 alias g='git'
+alias cv='git cv'
+alias sc='/Applications/Commander.app/Contents/MacOS/commander'
 alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
 alias mplaylist='mplayer -playlist'
 alias conflicts="git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs -o $EDITOR && git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs git add"
@@ -26,12 +28,11 @@ export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games:~/.local/bin
 
 if $IS_MAC; then
     # MAC quirks
-    export HOMEBREW_GITHUB_API_TOKEN='e18d78cd807dbae5b9e5020fb90b0e7ea415042d'
+    export HOMEBREW_GITHUB_API_TOKEN='97a41f87fd1953cd6b634fb83f9bf4cff5c6fc05'
     if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 fi
 
 set -o vi
-
 
 
 unset HISTFILESIZE
@@ -55,6 +56,9 @@ fi
 
 if $IS_MAC; then
     brew_prefix=$(brew --prefix)
+    alias vim='nvim'
+    alias fixInkscape='wmctrl -r Inkscape -e 0,4000,2560,2880,1800'
+    alias fixInkscapeExt='wmctrl -r Inkscape -e 0,0,0,2560,1300'
 else
     brew_prefix=''
 fi
@@ -100,7 +104,7 @@ alias :q='exit'
 [ -f $brew_prefix/share/bash-completion/ ] && . $brew_prefix/share/bash-completion/bash_completion
 
 # Ingen bell
-xset b off 2>/dev/null
+$IS_MAC || xset b off 2>/dev/null
 
 XML_CATALOG_FILES=~/.vim/dtd1.2/catalog-dita.xml
 export XML_CATALOG_FILES
@@ -112,10 +116,7 @@ export IGNOREEOF=1
 #[ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
 PS1='\[\033[0;32m\]\u\[\033[00m\] \W \$ '
 if $IS_MAC; then
-	(command -v __git_ps1>/dev/null) && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
-#else
-#	source /usr/share/git/completion/git-completion.bash
-#	PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+	$(command -v __git_ps1>/dev/null) && PS1='\[\033[00m\]\W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
 fi
 
 $IS_MAC || eval `keychain --eval --nogui -Q -q id_rsa`
