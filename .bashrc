@@ -113,10 +113,27 @@ export XML_CATALOG_FILES
 # Don't exit straight away ^D
 export IGNOREEOF=1
 
-#[ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
-$(command -v __git_ps1>/dev/null) && PS1='\[\033[00m\]\W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
 
 $IS_MAC || eval `keychain --eval --nogui -Q -q id_rsa`
+
+if command -v pyenv 1>/dev/null 2>&1; then
+	eval "$(pyenv init -)"
+fi
+if command -v pyenv-virtualenv-init 1>/dev/null; then
+	eval "$(pyenv virtualenv-init -)"
+	export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
+
+function __python_venv {
+	venv_name=`pyenv version-name`
+	[[ $venv_name == "system" ]] && return
+	echo "($venv_name) "
+}
+
+#[ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+$(command -v __git_ps1>/dev/null) && PS1='\[\033[00m\]\W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+$(command -v pyenv>/dev/null) && PS1='$(__python_venv )'$PS1
+
 
 PERL_MB_OPT="--install_base \"/Users/amhov/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/amhov/perl5"; export PERL_MM_OPT;
