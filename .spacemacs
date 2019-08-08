@@ -321,8 +321,6 @@ you should place your code here."
         python-shell-interpreter "ipython"
         evil-escape-key-sequence "jk"
         evil-escape-delay 0.2
-        (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)    ;; was 'evil-copy-from-below
-
     )
   )
 ;; Do not write anything past this comment. This is where Emacs will
