@@ -1,6 +1,9 @@
 
 let $PYTHONPATH='.'
 
+set nocompatible
+set path+=**
+
 " Clear any existing autocommands..
 autocmd!
 autocmd FileType help wincmd L
@@ -25,7 +28,8 @@ execute pathogen#helptags()
 "let g:syntastic_python_checkers=['pylint', 'pyflakes']
 "let g:syntastic_check_on_open=0
 "let g:syntastic_auto_jump = 1
-call neomake#configure#automake('nw', 750)
+" Rung linting and so on when reading, writing and on normal mode changes
+call neomake#configure#automake('rnw', 750)
 
 
 inoremap jk <esc>
@@ -59,7 +63,7 @@ set showmode
 set showcmd
 
 " when using list, keep tabs at their full width and display `arrows':
-"execute 'set listchars+=tab:' . nr2char(187) . nr2char(183)
+execute 'set listchars+=tab:' . nr2char(187) . nr2char(183)
 " (Character 187 is a right double-chevron, and 183 a mid-dot.)
 
 " have the mouse enabled all the time:
@@ -67,7 +71,6 @@ set showcmd
 
 " don't have files trying to override this .vimrc:
 set nomodeline
-
 
 " * Text Formatting -- General
 

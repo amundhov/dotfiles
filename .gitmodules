@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/neomake"]
 	path = .vim/bundle/neomake
 	url = https://github.com/neomake/neomake.git
+[submodule "adobe-monospace-font"]
+	path = adobe-monospace-font
+	url = https://github.com/adobe-fonts/source-code-pro
