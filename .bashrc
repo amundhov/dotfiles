@@ -54,9 +54,9 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+alias vim='nvim'
 if $IS_MAC; then
     brew_prefix=$(brew --prefix)
-    alias vim='nvim'
     alias fixInkscape='wmctrl -r Inkscape -e 0,4000,2560,2880,1800'
     alias fixInkscapeExt='wmctrl -r Inkscape -e 0,0,0,2560,1300'
 else
