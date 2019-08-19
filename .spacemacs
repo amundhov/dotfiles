@@ -60,7 +60,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(helm-git-grep)
+   dotspacemacs-additional-packages '(helm-git-grep challenger-deep-theme yasnippet-snippets)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -321,7 +321,9 @@ you should place your code here."
         python-shell-interpreter "ipython"
         evil-escape-key-sequence "jk"
         evil-escape-delay 0.2
+        org-agenda-files '("~/work/tasks" "~/notes/" "~/notes/on_the_go")
     )
+  (load-theme 'challenger-deep t)
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

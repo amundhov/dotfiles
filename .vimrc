@@ -2,7 +2,9 @@
 let $PYTHONPATH='.'
 
 set nocompatible
-set path+=**
+set path+=**,~/
+set wildignore+=**.cout,**.xcl,**.pbi,**.o,**.i
+command! MakeTags !ctags -R .
 
 " Clear any existing autocommands..
 autocmd!
@@ -10,8 +12,15 @@ autocmd FileType help wincmd L
 
 if has('syntax') && (&t_Co > 2)
   syntax on
+  set foldmethod=syntax
 endif
 
+let g:netrw_banner=0
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1  " open splits to right
+let g:netrw_list_style=3 " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_browse_split=4
 
 set relativenumber
 set cursorline
@@ -148,9 +157,9 @@ set incsearch
 " page down with <Space> (like in `Lynx', `Mutt', `Pine', `Netscape Navigator',
 " `SLRN', `Less', and `More'); page up with - (like in `Lynx', `Mutt', `Pine'),
 " or <BkSpc> (like in `Netscape Navigator'):
-"noremap <Space> <PageDown>
-"noremap <BS> <PageUp>
-"noremap - <PageUp>
+noremap <Space> <PageDown>
+noremap <BS> <PageUp>
+noremap - <PageUp>
 " [<Space> by default is like l, <BkSpc> like h, and - like k.]
 
 " scroll the window (but leaving the cursor in the same place) by a couple of
