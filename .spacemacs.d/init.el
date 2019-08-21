@@ -47,7 +47,10 @@ values."
      ;; better-defaults
      emacs-lisp
      ;; markdown
-     (org :variables org-want-todo-bindings t)
+     bibtex
+     (org :variables
+          org-want-todo-bindings t
+          org-enable-reveal-js-support t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -321,6 +324,10 @@ you should place your code here."
         python-shell-interpreter "ipython"
         evil-escape-key-sequence "jk"
         evil-escape-delay 0.2
+        org-ref-default-bibliography '("~/Dropbox/Articles/references.bib")
+        org-ref-pdf-directory "~/Dropbox/Articles/"
+        org-ref-bibliography-notes "~/Dropbox/org/papers.org"
+        org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
     )
   )
 ;; Do not write anything past this comment. This is where Emacs will
