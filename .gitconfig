@@ -24,5 +24,3 @@
 [core]
 	autocrlf = input
 	excludesfile = /Users/amhov/.gitignore_global
-[commit]
-	template = /Users/amhov/.stCommitMsg
