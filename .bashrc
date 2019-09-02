@@ -1,5 +1,3 @@
-export LC_ALL="nb_NO.UTF-8"
-export LANGUAGE='en'
 
 # Ikke fortsett hvis vi ikke kjører interaktiv
 [ -z "$PS1" ] && return
@@ -8,6 +6,8 @@ if $(uname -s | grep -q 'Darwin'); then
     IS_MAC=true
 else
     IS_MAC=false
+	export LC_ALL="nb_NO.UTF-8"
+	export LANGUAGE='en'
 fi
 
 export EDITOR=vim
