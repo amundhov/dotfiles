@@ -28,11 +28,9 @@ export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games
 if $IS_MAC; then
     # MAC quirks
     export HOMEBREW_GITHUB_API_TOKEN='97a41f87fd1953cd6b634fb83f9bf4cff5c6fc05'
-    if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 fi
 
 set -o vi
-
 
 unset HISTFILESIZE
 HISTSIZE=10000
@@ -54,12 +52,9 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 if $IS_MAC; then
-    brew_prefix=$(brew --prefix)
     alias vim='nvim'
     alias fixInkscape='wmctrl -r Inkscape -e 0,4000,2560,2880,1800'
     alias fixInkscapeExt='wmctrl -r Inkscape -e 0,0,0,2560,1300'
-else
-    brew_prefix=''
 fi
 
 
@@ -98,42 +93,26 @@ alias l='ls -lha'
 # <3 the vim way
 alias :q='exit'
 
-# Givf completion!
-[ -f $brew_prefix/etc/bash_completion ] && . $brew_prefix/etc/bash_completion
-[ -f $brew_prefix/share/bash-completion/ ] && . $brew_prefix/share/bash-completion/bash_completion
+# Use bash-completion, if available
+if $IS_MAC; then
+	bash_completion_prefix='/usr/local/opt/bash-completion@2'
+	#[[ $PS1 && -f $bash_completion_prefix/etc/profile.d/bash_completion.sh ]] && \
+	#	. $bash_completion_prefix/etc/profile.d/bash_completion.sh
+	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+	[[ $PS1 ]] && . /usr/local/Cellar/bash-completion@2/2.8/share/bash-completion/bash_completion
+fi
 
 # Ingen bell
 $IS_MAC || xset b off 2>/dev/null
 $IS_MAC || setterm -blength 0
 
-XML_CATALOG_FILES=~/.vim/dtd1.2/catalog-dita.xml
-export XML_CATALOG_FILES
-
-
 # Don't exit straight away ^D
 export IGNOREEOF=1
 
-
 $IS_MAC || eval `keychain --eval --nogui -Q -q id_rsa`
-
-if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
-fi
-if command -v pyenv-virtualenv-init 1>/dev/null; then
-	eval "$(pyenv virtualenv-init -)"
-	export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-fi
-
-function __python_venv {
-	venv_name=`pyenv version-name`
-	[[ $venv_name == "system" ]] && return
-	echo "($venv_name) "
-}
-
-#[ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
-$(command -v __git_ps1>/dev/null) && PS1='\[\033[00m\]\W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
-$(command -v pyenv>/dev/null) && PS1='$(__python_venv )'$PS1
-
 
 PERL_MB_OPT="--install_base \"/Users/amhov/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/amhov/perl5"; export PERL_MM_OPT;
+
+#[ -f $usr_prefix/etc/bash_completion.d/git-prompt.sh ] && PS1='\[\033[0;32m\]\u\[\033[00m\] \W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
+PS1='\[\033[00m\]\W$(__git_ps1 " \[\033[33m\](%s)\[\033[00m\]"):\$ '
