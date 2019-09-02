@@ -1,5 +1,5 @@
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
+export LC_ALL="nb_NO.UTF-8"
+export LANGUAGE='en'
 
 # Ikke fortsett hvis vi ikke kjører interaktiv
 [ -z "$PS1" ] && return
@@ -22,8 +22,9 @@ alias sc='/Applications/Commander.app/Contents/MacOS/commander'
 alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
 alias mplaylist='mplayer -playlist'
 alias conflicts="git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs -o $EDITOR && git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs git add"
+alias makeaur='makepkg -sri'
 
-export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games
+export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games:~/.local/bin
 
 if $IS_MAC; then
     # MAC quirks
@@ -51,6 +52,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+alias vim='nvim'
 if $IS_MAC; then
     alias vim='nvim'
     alias fixInkscape='wmctrl -r Inkscape -e 0,4000,2560,2880,1800'
@@ -104,7 +106,6 @@ fi
 
 # Ingen bell
 $IS_MAC || xset b off 2>/dev/null
-$IS_MAC || setterm -blength 0
 
 # Don't exit straight away ^D
 export IGNOREEOF=1
