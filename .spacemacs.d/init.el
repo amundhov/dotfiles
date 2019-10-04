@@ -32,6 +32,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     finance
      csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -47,6 +48,7 @@ values."
      ;; better-defaults
      emacs-lisp
      ;; markdown
+     pdf-tools
      bibtex
      (org :variables
           org-want-todo-bindings t
@@ -57,13 +59,14 @@ values."
      ;; spell-checking
      syntax-checking
      (python :variables python-test-runner 'pytest)
+     (ess :variables ess-enable-smart-equals t)
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(helm-git-grep challenger-deep-theme yasnippet-snippets)
+   dotspacemacs-additional-packages '(helm-git-grep challenger-deep-theme yasnippet-snippets org-noter)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -328,7 +331,12 @@ you should place your code here."
         org-ref-pdf-directory "~/Dropbox/Articles/"
         org-ref-bibliography-notes "~/Dropbox/org/papers.org"
         org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
-        org-agenda-files '("~/work/tasks" "~/notes/" "~/notes/on_the_go")
+        org-agenda-files '("~/work/tasks" "~/notes" "~/notes/on_the_go")
+        org-todo-keywords '((sequence "TODO" "FEEDBACK" "DONE"))
+        org-refile-targets
+        '(
+          (org-agenda-files :maxlevel . 2)
+          )
     )
   (load-theme 'challenger-deep t)
   )
