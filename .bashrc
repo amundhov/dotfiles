@@ -102,6 +102,8 @@ if $IS_MAC; then
 	#	. $bash_completion_prefix/etc/profile.d/bash_completion.sh
 	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 	[[ $PS1 ]] && . /usr/local/Cellar/bash-completion@2/2.8/share/bash-completion/bash_completion
+else
+	. /usr/share/git/git-prompt.sh
 fi
 
 # Ingen bell
