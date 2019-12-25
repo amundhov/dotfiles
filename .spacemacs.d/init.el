@@ -32,6 +32,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     markdown
      finance
      csv
      ;; ----------------------------------------------------------------
@@ -314,6 +315,21 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   )
 
+(defun org-promote-to-top-level ()
+    "Promote a single subtree to top-level."
+  (let ((cur-level (org-current-level)))
+    (loop repeat (/ (- cur-level 1) (org-level-increment))
+          do (org-promote-subtree))))
+
+;; Define a function that applies "org-promote-to-top-level" 
+;; to each :export: subtree:
+(defun org-export-trees-to-top-level (backend)
+  "Promote all subtrees tagged :export: to top-level.
+BACKEND is the export back-end being used, as a symbol."
+  (org-map-entries 'org-promote-to-top-level "+export"))
+
+
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -339,6 +355,9 @@ you should place your code here."
           )
     )
   (load-theme 'challenger-deep t)
+  ;; Make org-mode run "org-export-subtrees-to-top-level" as part of the export
+  ;; process:
+  (add-hook 'org-export-before-parsing-hook 'org-export-trees-to-top-level)
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
