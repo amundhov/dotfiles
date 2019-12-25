@@ -6,7 +6,7 @@ URxvt*foreground:white
 URxvt*background:rgba:0000/0000/0000/0000
 
 URxvt.perl-ext: default, matcher
-URxvt.urlLauncher: /usr/bin/firefox
+URxvt.urlLauncher: /usr/bin/chromium
 URxvt.matcher.button: 2
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-] 
 
