@@ -8,6 +8,7 @@ else
     IS_MAC=false
 	export LC_ALL="nb_NO.UTF-8"
 	export LANGUAGE='en'
+	export BUILDDIR=~/build/
 fi
 
 export EDITOR=vim
