@@ -337,6 +337,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (require 'org-protocol)
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"
         projectile-enable-caching t
         global-company-mode t
@@ -353,7 +354,23 @@ you should place your code here."
         '(
           (org-agenda-files :maxlevel . 2)
           )
+        ;; (add-hook 'server-switch-hook
+        ;;   (lambda nil
+        ;;     (let ((server-buf (current-buffer)))
+        ;;       (bury-buffer)
+        ;;       (switch-to-buffer-other-frame server-buf))))
     )
+  (setq org-capture-templates
+        '(
+          ("bc" "Bookmark Company"
+           entry (file+headline "~/notes/bio.org" "Companies")
+           "* %:annotation :bookmark:\n%i\n:PROPERTIES:\n:LOCATION: %^{Location}\n:CREATED: %U\n:END:\n\n" :empty-lines 1)
+          ("br" "Bookmark Reference"
+           entry (file+headline "~/notes/on_the_go/1. References.org" "Bookmarks")
+           "* %:annotation :bookmark:\n%i\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n" :empty-lines 1)
+          )
+        )
+
   (load-theme 'challenger-deep t)
   ;; Make org-mode run "org-export-subtrees-to-top-level" as part of the export
   ;; process:
