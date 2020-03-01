@@ -20,12 +20,13 @@ alias vi='vim'
 alias g='git'
 alias cv='git cv'
 alias sc='/Applications/Commander.app/Contents/MacOS/commander'
+alias scr='~/sw/build-commander-Desktop_Qt_5_12_4_clang_64bit-Release/deploy/commander.app/Contents/MacOS/commander'
+alias scd='~/sw/build-commander-Desktop_Qt_5_12_4_clang_64bit-Debug/deploy/commander.app/Contents/MacOS/commander'
 alias boka='sudo sshfs root@einhov.dyndns.org:/home/data/ /mnt/boka/ -o allow_other'
 alias mplaylist='mplayer -playlist'
 alias conflicts="git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs -o $EDITOR && git status --porcelain | grep UU | cut -f 2 -d ' ' | xargs git add"
 alias makeaur='makepkg -sri'
 
-export PATH=/usr/local/bin:${PATH}:/usr/local/sbin:/usr/local/games:~/.local/bin
 
 if $IS_MAC; then
     # MAC quirks

@@ -32,7 +32,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     markdown
+     javascript
      finance
      csv
      ;; ----------------------------------------------------------------
@@ -43,8 +43,9 @@ values."
      git
      helm
      gtags
-     (osx :variables osx-option-as 'meta
-                     osx-right-option-as 'none)
+     (c-c++ :variables c-c++-enable-clang-support t)
+     semantic
+     osx
      auto-completion
      ;; better-defaults
      emacs-lisp
@@ -339,6 +340,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (require 'org-protocol)
+  ;(spacemacs/set-leader-keys-for-major-mode 'c++-mode "h" 'projectile-find-other-file)
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"
         projectile-enable-caching t
         global-company-mode t
@@ -360,6 +362,7 @@ you should place your code here."
         ;;     (let ((server-buf (current-buffer)))
         ;;       (bury-buffer)
         ;;       (switch-to-buffer-other-frame server-buf))))
+        term-char-mode-point-at-process-mark nil  ; workaround when navigating the terminal buffer
     )
   (setq org-capture-templates
         '(
@@ -376,6 +379,27 @@ you should place your code here."
   ;; Make org-mode run "org-export-subtrees-to-top-level" as part of the export
   ;; process:
   (add-hook 'org-export-before-parsing-hook 'org-export-trees-to-top-level)
+  (with-eval-after-load 'org
+    (setq org-ref-default-bibliography '("~/Dropbox/Articles/references.bib")
+          org-ref-pdf-directory "~/Dropbox/Articles/"
+          org-ref-bibliography-notes "~/Dropbox/org/papers.org"
+          org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
+          org-modules (quote (org-habit))
+          org-todo-keywords '((sequence "TODO" "ACTIVE" "|" "DONE"))
+          org-agenda-files '("~/work/tasks" "~/notes/" "~/notes/on_the_go")
+          org-refile-targets '((org-agenda-files :maxlevel . 2)))
+          org-confirm-babel-evaluate nil
+    (org-defkey org-mode-map [(meta return)] 'org-meta-return) ;; Workaround for broken meta-return
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((R . t)
+       (emacs-lisp . t)
+       (python . t)
+       (shell . t)
+       (ledger . t)
+       )
+     )
+    )
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
