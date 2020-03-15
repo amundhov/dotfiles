@@ -32,6 +32,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     html
      javascript
      markdown
      finance
@@ -64,6 +65,7 @@ values."
      ;; spell-checking
      syntax-checking
      (python :variables python-test-runner 'pytest)
+     ipython-notebook
      (ess :variables ess-enable-smart-equals t)
      ;; version-control
      )
