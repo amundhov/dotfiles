@@ -319,6 +319,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
   )
 
 (defun org-promote-to-top-level ()
